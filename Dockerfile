@@ -9,6 +9,8 @@ RUN useradd --create-home --comment "Arch Build User" build
 RUN usermod -aG wheel build
 RUN echo '%wheel ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
+RUN sed -i 's/# Misc options/ParallelDownloads = 2\nColor\nILoveCandy\n/' /etc/pacman.conf
+
 RUN mkdir /w
 RUN chown build /w
 
@@ -30,4 +32,4 @@ USER build
 COPY --from=base / /
 
 ENTRYPOINT [ "/entrypoint.sh", "makepkg" ]
-CMD [ "--force", "--syncdeps", "--noconfirm", "--cleanbuild" ]
+CMD [ "--force", "--syncdeps", "--noconfirm", "--cleanbuild", "--clean" ]
