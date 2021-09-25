@@ -1,0 +1,14 @@
+= Arch Linux makepkg Docker image
+
+Docker image suitable for testing `PKGBUILD`s
+
+== Usage
+[source, shell]
+----
+docker run -v $PWD:/w -v pkg:/var/cache/pacman --rm -it sfesenko/makepkg
+----
+or
+[source, shell]
+----
+docker run -v $PWD:/w -v /var/cache/pacman:/var/cache/pacman --rm -it sfesenko/makepkg
+----
