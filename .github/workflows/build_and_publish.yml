@@ -79,7 +79,7 @@ jobs:
           build-args: VERSION=${{ env.VERSION }}
           tags: |
             ${{ env.REPOSITORY }}:latest
-          # ${{ env.REPOSITORY }}:${{ env.VERSION }}
+            ${{ env.REPOSITORY }}:${{ env.VERSION }}
           # ${{ env.REPOSITORY }}:${{ github.sha }}
       -
         # Temp fix
