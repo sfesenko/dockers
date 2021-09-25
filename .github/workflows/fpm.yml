@@ -1,0 +1,22 @@
+name: makepkg
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'fpm/**'
+
+  workflow_dispatch:
+
+jobs:
+  push_to_registry:
+    name: Trigger build [ fpm ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger docker image build
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: build-docker-image
+          repo: sfesenko/dockers
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          inputs: '{ "build_context": "fpm" }'
