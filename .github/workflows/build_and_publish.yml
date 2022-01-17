@@ -20,6 +20,11 @@ on:
         description: directory with docker build context.
         required: true
         type: string
+    secrets:
+      DOCKERHUB_USERNAME:
+        required: true
+      DOCKERHUB_TOKEN:
+        required: true
 
 env:
   TARGET_CONTEXT: ${{ inputs.build_context || github.event.inputs.build_context }}

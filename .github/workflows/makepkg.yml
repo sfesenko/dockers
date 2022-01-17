@@ -17,3 +17,6 @@ jobs:
     uses: sfesenko/dockers/.github/workflows/build_and_publish.yml@master
     with:
       build_context: makepkg
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
