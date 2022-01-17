@@ -3,13 +3,13 @@ FROM archlinux:base-devel as base
 RUN pacman --sync --refresh --sysupgrade --noconfirm --noprogressbar --quiet
 RUN pacman --sync --noconfirm --noprogressbar --quiet git namcap
 #RUN pacman --sync --noconfirm --noprogressbar --quiet sudo fakeroot
-RUN yes | pacman --sync -cc
+RUN yes | pacman --sync -cc --overwrite '/etc/*'
 
 RUN useradd --create-home --comment "Arch Build User" build
 RUN usermod -aG wheel build
 RUN echo '%wheel ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-RUN sed -i 's/# Misc options/ParallelDownloads = 2\nColor\nILoveCandy\n/' /etc/pacman.conf
+RUN sed -i 's/#Color/Color/; s/# Misc options/# Misc options\nILoveCandy/' /etc/pacman.conf
 
 RUN mkdir /w
 RUN chown build /w

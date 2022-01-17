@@ -1,6 +1,9 @@
 name: makepkg
 
 on:
+  schedule:
+    - cron: '15 3 * * 0'
+
   push:
     branches: [ master ]
     paths:
@@ -9,14 +12,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  push_to_registry:
-    name: Trigger build [ makepkg ]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger docker image build
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: build-docker-image
-          repo: sfesenko/dockers
-          token: ${{ secrets.PERSONAL_TOKEN }}
-          inputs: '{ "build_context": "makepkg" }'
+  build_and_publish:
+    name: Build [ makepkg ]
+    uses: sfesenko/dockers/.github/workflows/build_and_publish.yml@master
+    with:
+      build_context: makepkg
