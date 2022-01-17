@@ -22,12 +22,12 @@ on:
         type: string
 
 env:
-  TARGET_CONTEXT: ${{ github.event.inputs.build_context }}
+  TARGET_CONTEXT: ${{ inputs.build_context || github.event.inputs.build_context }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build [ ${{ github.event.inputs.build_context }} ]
+    name: Build [ ${{ inputs.build_context || github.event.inputs.build_context }} ]
     timeout-minutes: 10
 
     steps:
