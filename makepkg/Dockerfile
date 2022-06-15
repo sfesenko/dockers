@@ -9,7 +9,7 @@ RUN useradd --create-home --comment "Arch Build User" build
 RUN usermod -aG wheel build
 RUN echo '%wheel ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-RUN sed -i 's/#Color/Color/; s/# Misc options/# Misc options\nILoveCandy/' /etc/pacman.conf
+RUN sed -i 's/#Color/Color/; s/# Misc options/# Misc options\nILoveCandy/; s/^NoProgressBar/#NoProgressBar/' /etc/pacman.conf
 
 RUN mkdir /w
 RUN chown build /w
